@@ -35,7 +35,7 @@
             <ul class = "flex md:flex-row flex-col justify-between md:items-center md:gap-[4vw] gap-6 w-full  ">
                 {% if request.user.is_authenticated %}
                     <li class="w-full flex justify-center items-center">
-                        <a class="hover:underline hover:underline-offset-2" href="">Salir</a>
+                        <a class="hover:underline hover:underline-offset-2" href="{% url 'logout1' %}">Salir</a>
                     </li>
                 {% else %}
                     <li class="w-full flex justify-center items-center">
