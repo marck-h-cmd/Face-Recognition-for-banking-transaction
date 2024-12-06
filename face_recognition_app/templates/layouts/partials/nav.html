@@ -1,0 +1,71 @@
+<header class="bg-white">
+    <nav class = " flex flex-col  items-center w-[96%] m-4">
+        <div class="flex w-[96%] justify-between  my-2">
+            <div class="flex items-center ">
+                <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer text-black"></ion-icon>
+            </div>
+            <div class="flex aling-center items-center">
+                <a href="{% url 'menu' %}">
+                    <img class= "h-10 cursor-pointer" src="https://logos-world.net/wp-content/uploads/2021/03/TD-Bank-Logo.png"   alt="...">
+                </a>
+                <a href="{% url 'menu' %}">
+                    <h1 class="text-3xl font-semibold text-black hidden md:block">EUREKA BANK</h1>
+                </a>
+            </div>
+            <div class="flex items-center gap-8">
+                <div class=" ">
+                    <ion-icon onclick="onTogglePerson(this)" name="person" class="text-3xl cursor-pointer text-black"></ion-icon>
+                </div>
+            </div>
+        </div>
+        <div class = "font-[poppins] nav-links duration-0  absolute text-black bg-stone-50 md:min-h-[13vh] min-h-[55vh] left-0 top-[-100%] w-full flex items-center z-30 px-5  ">
+            <ul class = "flex md:flex-row flex-col justify-between md:items-center md:gap-[4vw] gap-6 w-full ">
+                <li class="w-full flex justify-center items-center">
+                    <a class="hover:underline hover:underline-offset-2" href="">PRODUCTOS</a>
+                </li>
+                <li class="w-full flex justify-center items-center">
+                    <a class="hover:underline hover:underline-offset-2" href="">TIPOS DE CUENTAS</a>
+                </li>
+                <li class="w-full flex justify-center items-center">
+                    <a class="hover:underline hover:underline-offset-2" href="">PROMOCIONES</a>
+                </li>
+            </ul>
+        </div>
+        <div class = "font-[poppins] nav-links1 duration-0  absolute text-black bg-stone-50 md:min-h-[13vh] min-h-[55vh] left-0 top-[-100%] w-full flex items-center z-20 px-5  ">
+            <ul class = "flex md:flex-row flex-col justify-between md:items-center md:gap-[4vw] gap-6 w-full  ">
+                {% if request.user.is_authenticated %}
+                    <li class="w-full flex justify-center items-center">
+                        <a class="hover:underline hover:underline-offset-2" href="">Salir</a>
+                    </li>
+                {% else %}
+                    <li class="w-full flex justify-center items-center">
+                        <a class="hover:underline hover:underline-offset-2" href="{% url 'login' %}">Iniciar Sesion</a>
+                    </li>
+                    <li class="w-full flex justify-center items-center">
+                        <a class="hover:underline hover:underline-offset-2" href="">Registrarse</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>
+<script>
+    const navLinks = document.querySelector('.nav-links')
+    function onToggleMenu(e){
+        e.name = e.name === 'menu' ? 'close' : 'menu'
+        navLinks.classList.toggle('top-[15%]')
+    }
+</script>
+<script>
+    const navLinks3 = document.querySelector('.nav-links3')
+    function onToggleSearch(s){
+        
+    }
+</script>
+<script>
+    const navLinks1 = document.querySelector('.nav-links1')
+    function onTogglePerson(p){
+        p.name = p.name === 'person' ? 'close' : 'person'
+        navLinks1.classList.toggle('top-[15%]')
+    }
+</script>

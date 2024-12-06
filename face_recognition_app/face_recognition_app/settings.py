@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'face_recognition_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': dotenv_values(".env.DB_NAME"),
-        'USER': dotenv_values(".env.USER"),
-        'PASSWORD': dotenv_values(".env.DB_PASSWORD"),
-        'HOST': dotenv_values(".env.DB_HOST"),
-        'PORT': dotenv_values(".env.PORT"),
+        'NAME': 'face_recognition_app_db',
+        'USER': 'postgres',
+        'PASSWORD': 'Cnic2024#kiki',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
