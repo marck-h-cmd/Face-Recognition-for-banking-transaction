@@ -1,0 +1,26 @@
+{% extends "layouts/base.html" %}
+{% block main %}
+    {% load crispy_forms_tags %}
+        <div class="lg:flex">
+            <div class="lg:w-[60vw] md:w-[80vw] w-[90vw] bg-stone-100 mx-auto ">
+                <div class="m-8 ">
+                    <div class="">
+                        <p class="text-3xl">
+                            REGISTRO DE CUENTA
+                        </p>
+                    </div>
+                </div>
+                    <div class="card w-[90%] mx-8  mb-8 ">
+                        <div class="card-body">
+                            <form action="" method="POST" class="">
+                                {% csrf_token %}
+                                {{ form | crispy}}
+                                <div class="flex justify-center items-center m-4">
+                                    <input class="rounded-sm p-1 bg-black w-40 text-white" type="submit" value="Siguiente">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+            </div>
+        </div>
+{% endblock %}
