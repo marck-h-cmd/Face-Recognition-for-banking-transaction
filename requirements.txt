@@ -3,3 +3,8 @@ Django==5.1.2
 django-crispy-forms==2.3
 psycopg2-binary==2.9.10
 python-dotenv
+opencv-python 
+opencv-python-headless
+cmake
+dlib
+face_recognition
