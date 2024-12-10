@@ -6,21 +6,21 @@ import cv2
 import numpy as np
 from django.contrib import messages
 from .form import CustomUserCreationForm  # Tu formulario de creación de usuario
-from .face_utils import encode_face 
+# from .face_utils import encode_face 
 
 # Create your views here.
 @login_required
 def login1(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+    # if request.method == "POST":
+    #     username = request.POST['username']
+    #     password = request.POST['password']
+    #     user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)  # Autentica y guarda la sesión
-            return redirect('menu')  # Redirige al menú principal
-        else:
-            messages.error(request, "Usuario o contraseña incorrectos.")  # Agrega un mensaje de error
+    #     if user is not None:
+    #         login(request, user)  # Autentica y guarda la sesión
+    #         return redirect('menu')  # Redirige al menú principal
+    #     else:
+    #         messages.error(request, "Usuario o contraseña incorrectos.")  # Agrega un mensaje de error
 
     return render(request, 'login1')  # Muestra el formulario de inicio de sesión
 
@@ -35,32 +35,32 @@ def register(request):
     
     if request.method == 'POST':
         user_creation_form = CustomUserCreationForm(data=request.POST)
-        face_image_base64 = request.POST.get('face_image')  # Imagen capturada en vivo
+        # face_image_base64 = request.POST.get('face_image')  # Imagen capturada en vivo
         
-        if not face_image_base64:
-            messages.error(request, "Debes tomar una foto para registrarte.")
-            return render(request, 'register.html', data)
+        # if not face_image_base64:
+        #     messages.error(request, "Debes tomar una foto para registrarte.")
+        #     return render(request, 'register.html', data)
         
-        # Decodificar la imagen base64
-        try:
-            format, imgstr = face_image_base64.split(';base64,') 
-            img_data = base64.b64decode(imgstr)
-            nparr = np.frombuffer(img_data, np.uint8)
-            image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        except Exception as e:
-            messages.error(request, "Error al procesar la imagen. Inténtalo de nuevo.")
-            return render(request, 'register.html', data)
+        # # Decodificar la imagen base64
+        # try:
+        #     format, imgstr = face_image_base64.split(';base64,') 
+        #     img_data = base64.b64decode(imgstr)
+        #     nparr = np.frombuffer(img_data, np.uint8)
+        #     image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        # except Exception as e:
+        #     messages.error(request, "Error al procesar la imagen. Inténtalo de nuevo.")
+        #     return render(request, 'register.html', data)
 
-        # Generar codificación facial
-        face_encoding = encode_face(image)
-        if not face_encoding:
-            messages.error(request, "No se detectó un rostro. Por favor, asegúrate de que tu cara esté visible.")
-            return render(request, 'register.html', data)
+        # # Generar codificación facial
+        # face_encoding = encode_face(image)
+        # if not face_encoding:
+        #     messages.error(request, "No se detectó un rostro. Por favor, asegúrate de que tu cara esté visible.")
+        #     return render(request, 'register.html', data)
 
         if user_creation_form.is_valid():
-            user = user_creation_form.save(commit=False)
-            user.face_encoding = face_encoding.tobytes()  # Guardar codificación facial
-            user.save()
+            # user = user_creation_form.save(commit=False)
+            # user.face_encoding = face_encoding.tobytes()  # Guardar codificación facial
+            # user.save()
 
             # Autenticar y redirigir al usuario
             auth_user = authenticate(

@@ -12,6 +12,9 @@
                 </div>
                 <div class="card w-[90%] mx-8  mb-8 ">
                     <div class="card-body">
+                        <video id="video" width="640" height="480" autoplay></video>
+                        <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+                        <button id="capture">Tomar Foto</button>
                         <form action="" method="POST" class="" id="uploadForm" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ form | crispy}}
@@ -23,19 +26,17 @@
                         </form>
                     </div>
                 </div>
-                <video id="video" width="640" height="480" autoplay></video>
-                <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-                <button id="capture">Tomar Foto</button>
             </div>
         </div>
 {% endblock %}
+{% block scripts %}
 <script>
     // Acceso a la cámara
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const captureButton = document.getElementById('capture');
     const faceImageInput = document.getElementById('faceImage');
-    const submitButton = document.getElementById('submit');
+    const submitButton = document.querySelector("form input[type='submit']");
 
     // Solicitar permiso de la cámara
     navigator.mediaDevices.getUserMedia({ video: true })
@@ -64,3 +65,4 @@
         }
     });
 </script>
+{% endblock %}
