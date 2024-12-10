@@ -10,17 +10,57 @@
                         </p>
                     </div>
                 </div>
-                    <div class="card w-[90%] mx-8  mb-8 ">
-                        <div class="card-body">
-                            <form action="" method="POST" class="">
-                                {% csrf_token %}
-                                {{ form | crispy}}
-                                <div class="flex justify-center items-center m-4">
-                                    <input class="rounded-sm p-1 bg-black w-40 text-white" type="submit" value="Siguiente">
-                                </div>
-                            </form>
-                        </div>
+                <div class="card w-[90%] mx-8  mb-8 ">
+                    <div class="card-body">
+                        <form action="" method="POST" class="" id="uploadForm" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form | crispy}}
+                            <div class="flex justify-center items-center m-4">
+                                <input class="rounded-sm p-1 bg-black w-40 text-white" type="submit" value="Siguiente">
+                                <input type="hidden" name="face_image" id="faceImage">
+
+                            </div>
+                        </form>
                     </div>
+                </div>
+                <video id="video" width="640" height="480" autoplay></video>
+                <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+                <button id="capture">Tomar Foto</button>
             </div>
         </div>
 {% endblock %}
+<script>
+    // Acceso a la cámara
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const captureButton = document.getElementById('capture');
+    const faceImageInput = document.getElementById('faceImage');
+    const submitButton = document.getElementById('submit');
+
+    // Solicitar permiso de la cámara
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+            video.srcObject = stream;
+        })
+        .catch((err) => {
+            console.error("No se pudo acceder a la cámara: ", err);
+        });
+
+    // Capturar una imagen del video
+    captureButton.addEventListener('click', () => {
+        const context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Convertir la imagen a base64
+        const dataURL = canvas.toDataURL('image/jpeg');
+        faceImageInput.value = dataURL; // Guardar la imagen base64 en el formulario
+    });
+
+    // Evitar enviar si no se ha capturado una foto
+    submitButton.addEventListener('click', (e) => {
+        if (!faceImageInput.value) {
+            e.preventDefault();
+            alert("Primero toma una foto.");
+        }
+    });
+</script>
