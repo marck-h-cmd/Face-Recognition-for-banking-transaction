@@ -11,7 +11,7 @@ class Account(models.Model):
     
 class Transaction(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='transactions')
-    transactionType = models.CharField(max_length=12, choices=[('deposit', 'Deposit'),('withdrawal', 'Withdrawal')])
+    transactionType = models.CharField(max_length=12, choices=[('deposit', 'Deposito'),('withdrawal', 'Retiro')])
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     dateTransaction = models.DateTimeField(auto_now_add=True)
     def __str__(self):

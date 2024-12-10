@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
@@ -65,13 +66,10 @@ def register(request):
             # user.save()
 
             # Autenticar y redirigir al usuario
-            auth_user = authenticate(
-                username=user_creation_form.cleaned_data['username'],
-                password=user_creation_form.cleaned_data['password1']
-            )
-            if auth_user:
-                login(request, auth_user)
-                return redirect('menu')
+            user_creation_form.save()
+            user=authenticate(username=user_creation_form.cleaned_data['username'], password=user_creation_form.cleaned_data['password1'])
+            login(request,user)
+            return redirect('menu')
     
     return render(request, 'register.html', data)
 @login_required
@@ -87,7 +85,7 @@ def createAccount(request):
 @login_required
 def makeTransaction(request):
     if not hasattr(request.user, 'account'):
-        messages.error(request, "You need an account to perform transactions.")
+        messages.error(request, "Necesitas una cuenta para empezar a hacer transacciones.")
         return redirect('createAccount')
 
     account = request.user.account
@@ -97,7 +95,7 @@ def makeTransaction(request):
         amount = form.cleaned_data['amount']
 
         if transactionType == 'withdrawal' and account.balance < amount:
-            messages.error(request, "Insufficient balance.")
+            return render(request,'insuficientBalance.html')
         else:
             # Actualiza el saldo
             if transactionType == 'deposit':

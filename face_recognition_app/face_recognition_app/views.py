@@ -4,4 +4,4 @@ from django.contrib.auth.decorators import login_required
 def menu(request):
     account = getattr(request.user, 'account', None)
     transactions = account.transactions.all() if account else []
-    return render(request, 'dashboard.html', {'account': account, 'transactions': transactions})
+    return render(request, 'menu.html', {'account': account, 'transactions': transactions})

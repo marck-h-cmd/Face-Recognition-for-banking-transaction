@@ -1,10 +1,10 @@
 {% extends "layouts/base.html" %}
 {% block main %}
-<h1>Welcome, {{ user.username }}</h1>
+<h1>Bienvenido, {{ user.username }}</h1>
 
     {% if account %}
-        <p>Account Number: {{ account.accountNumber }}</p>
-        <p>Balance: ${{ account.balance }}</p>
+        <p>Numero de cuenta: {{ account.accountNumber }}</p>
+        <p>Saldo: S/.{{ account.balance }}</p>
 
         <h2>Transacciones</h2>
         <ul>

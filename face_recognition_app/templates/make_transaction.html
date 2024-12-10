@@ -1,13 +1,17 @@
 {% extends "layouts/base.html" %}
 {% block main %}
-    <h1>Hacer una transaccion</h1>
-    <p>Saldo disponible: ${{ balance }}</p>
-
+    {% load crispy_forms_tags %}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <div class="card w-[50%] mx-auto my-16">
+            <div class="card-body">
+                <h1>Hacer una transaccion</h1>
+                <p>Saldo disponible: S/. {{ balance }}</p>
+                {{ form | crispy }}
+                <button type="submit">Enviar</button>
+            </div>
+        </div>
     </form>
-
     <a href="{% url 'menu' %}">Ir a Menu de transacciones</a>
+
 {% endblock  %}
