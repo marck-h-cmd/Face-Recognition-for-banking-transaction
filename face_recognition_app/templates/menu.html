@@ -1,10 +1,20 @@
 {% extends "layouts/base.html" %}
 {% block main %}
-<main class="bg-green-50">
-    <p>Este es el menu</p>
-    <br>
-    <div class="flex justify-center">
-        
-    </div>
-</main>
+<h1>Welcome, {{ user.username }}</h1>
+
+    {% if account %}
+        <p>Account Number: {{ account.accountNumber }}</p>
+        <p>Balance: ${{ account.balance }}</p>
+
+        <h2>Transacciones</h2>
+        <ul>
+            {% for transaction in transactions %}
+                <li>{{ transaction.dateTransaction }} - {{ transaction.transactionType }}: ${{ transaction.amount }}</li>
+            {% endfor %}
+        </ul>
+        <br>
+        <a class="bg-black p-1 text-white m-4" href="{% url 'makeTransaction' %}">Hacer una transaccion</a>
+    {% else %}
+        <p>No tienes una cuenta. <a href="{% url 'createAccount' %}">Crear una cuenta</a>.</p>
+    {% endif %}
 {% endblock  %}

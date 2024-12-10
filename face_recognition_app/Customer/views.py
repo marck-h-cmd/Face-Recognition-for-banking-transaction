@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, authenticate, login
+from banking.models import Account, Transaction
+from banking.form import TransactionForm
 import base64
 import cv2
 import numpy as np
@@ -72,3 +74,43 @@ def register(request):
                 return redirect('menu')
     
     return render(request, 'register.html', data)
+@login_required
+def createAccount(request):
+    if not hasattr(request.user, 'account'):
+        accountNumber = f"ACC-{request.user.id:06}"
+        Account.objects.create(user=request.user, accountNumber=accountNumber)
+        messages.success(request, "Cuenta creada exitosamente!")
+    else:
+        messages.error(request,"Ya tienes una cuenta")
+    return redirect('menu')
+
+@login_required
+def makeTransaction(request):
+    if not hasattr(request.user, 'account'):
+        messages.error(request, "You need an account to perform transactions.")
+        return redirect('createAccount')
+
+    account = request.user.account
+    form = TransactionForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        transactionType = form.cleaned_data['transactionType']
+        amount = form.cleaned_data['amount']
+
+        if transactionType == 'withdrawal' and account.balance < amount:
+            messages.error(request, "Insufficient balance.")
+        else:
+            # Actualiza el saldo
+            if transactionType == 'deposit':
+                account.balance += amount
+            elif transactionType == 'withdrawal':
+                account.balance -= amount
+
+            account.save()
+
+            # Registra la transacción
+            Transaction.objects.create(account=account, transactionType=transactionType, amount=amount)
+            messages.success(request, f"{transactionType.capitalize()} of ${amount} was successful.")
+            return redirect('menu')
+
+    return render(request, 'make_transaction.html', {'form': form, 'balance': account.balance})
+
