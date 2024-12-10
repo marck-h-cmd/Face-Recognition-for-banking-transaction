@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-from dotenv import dotenv_values
+from ..utils import get_env_variable
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b^x0w)#4=%s-0!2+rnq89u)(ax@b8r36%*igq0zfz0@($bu7*0'
+SECRET_KEY = get_env_variable('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,14 +85,14 @@ WSGI_APPLICATION = 'face_recognition_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'face_recognition_app_db',
-        'USER': 'postgres',
-        'PASSWORD': 'Cnic2024#kiki',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+DATABASES = { 
+        'default': {
+        'ENGINE': get_env_variable('DB_ENGINE', 'django.db.backends.postgresql'),
+        'NAME': get_env_variable('DB_NAME', BASE_DIR / 'my_database'),
+        'USER': get_env_variable('DB_USER', ''),
+        'PASSWORD': get_env_variable('DB_PASSWORD', ''),
+        'HOST': get_env_variable('DB_HOST', 'localhost'),
+        'PORT': get_env_variable('DB_PORT', ''),
     }
 }
 
