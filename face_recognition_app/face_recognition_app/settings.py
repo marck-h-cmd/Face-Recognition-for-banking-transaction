@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-from ..utils import get_env_variable
+from face_recognition_app.utils import get_env_variable
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -87,12 +87,12 @@ WSGI_APPLICATION = 'face_recognition_app.wsgi.application'
 
 DATABASES = { 
         'default': {
-        'ENGINE': get_env_variable('DB_ENGINE', 'django.db.backends.postgresql'),
-        'NAME': get_env_variable('DB_NAME', BASE_DIR / 'my_database'),
-        'USER': get_env_variable('DB_USER', ''),
-        'PASSWORD': get_env_variable('DB_PASSWORD', ''),
-        'HOST': get_env_variable('DB_HOST', 'localhost'),
-        'PORT': get_env_variable('DB_PORT', ''),
+        'ENGINE': get_env_variable('DB_ENGINE'),
+        'NAME': get_env_variable('DB_NAME', str(BASE_DIR / 'my_database')),
+        'USER': get_env_variable('DB_USER'),
+        'PASSWORD': get_env_variable('DB_PASSWORD'),
+        'HOST': get_env_variable('DB_HOST'),
+        'PORT': get_env_variable('DB_PORT'),
     }
 }
 
