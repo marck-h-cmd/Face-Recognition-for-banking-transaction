@@ -1,0 +1,105 @@
+{% extends "layouts/base.html" %}
+{% block main %}
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
+
+<body class="font-poppins antialiased">
+  <div id="view" class="h-full w-screen flex flex-row" x-data="{ sidenav: false }">
+
+    <button
+      @click="sidenav = !sidenav"
+      :aria-expanded="sidenav"
+      class="p-2 bg-white border-2 rounded-md shadow-lg border-gray-200 text-gray-500 sm:hidden focus:outline-none focus:bg-teal-500 focus:text-white transition"
+    >
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path
+          fill-rule="evenodd"
+          d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+    </button>
+
+
+    <div
+      id="sidebar"
+      class="bg-white h-screen shadow-xl px-3 w-30 md:w-60 lg:w-60 transition-transform duration-300 ease-in-out transform"
+      :class="sidenav ? 'translate-x-0' : '-translate-x-full sm:translate-x-0'"
+    >
+      <div class="space-y-6 mt-10">
+
+        <h1 class="font-bold text-center text-4xl md:text-xl">
+          Eureka Bank<span class="text-teal-600">.</span>
+        </h1>
+
+ 
+        <div id="profile" class="space-y-3">
+          <img
+            src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png"
+            alt="Avatar user"
+            class="w-10 md:w-16 rounded-full mx-auto"
+          />
+          <div>
+            <h2 class="font-medium text-center text-teal-500">User</h2>
+            <p class="text-center text-xs text-gray-500">Empleado</p>
+          </div>
+        </div>
+
+
+        <div class="flex border-2 rounded-md border-gray-200 focus-within:ring-2 ring-teal-500">
+          <input
+            type="text"
+            class="w-full px-2 py-3 text-sm text-gray-600 rounded-tl-md rounded-bl-md focus:outline-none"
+            placeholder="Search"
+          />
+          <button class="px-2 py-3 text-gray-600">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+ 
+        <nav id="menu" class="space-y-2">
+          <a href="#" class="flex items-center px-2 py-2 text-gray-700 transition hover:bg-teal-500 hover:text-white rounded-md">
+            <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+              ></path>
+            </svg>
+            Principal
+          </a>
+
+          <a href="#" class="flex items-center px-2 py-2 text-gray-700 transition hover:bg-teal-500 hover:text-white rounded-md">
+            <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path
+                d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
+                </path>            
+            </svg>
+            clientes
+          </a>
+          
+          <a href="#" class="flex items-center px-2 py-2 text-gray-700 transition hover:bg-teal-500 hover:text-white rounded-md">
+            <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm14 0H4v2h12V5zm-6 7H6v2h4v-2z"></path>
+            </svg>
+            Cuentas bancarias
+          </a>
+          
+          <a href="#" class="flex items-center px-2 py-2 text-gray-700 transition hover:bg-teal-500 hover:text-white rounded-md">
+            <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2l10 6v2h-20v-2l10-6zM3 10h18v1h-18v-1zm1 2h2v8h-2v-8zm3 0h2v8h-2v-8zm4 0h2v8h-2v-8zm4 0h2v8h-2v-8zm3 0h2v8h-2v-8zm-16 10h20v2h-20v-2z" />
+            </svg>
+                Transacciones
+          </a>
+
+        </nav>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock  %}
