@@ -1,0 +1,68 @@
+{% extends "layouts/base.html" %}
+{% block main %}
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Banco - Panel de Cliente</h1>
+            <nav class="flex space-x-4">
+                <a href="#" class="hover:underline">Inicio</a>
+                <a href="#" class="hover:underline">Mi Cuenta</a>
+                <a href="#" class="hover:underline">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto py-8">
+        <h2 class="text-2xl font-bold text-center mb-6">Operaciones Bancarias</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Formulario de Retiro -->
+            <form class="bg-white shadow-md rounded-lg p-6">
+                <h3 class="text-lg font-bold mb-4">Retiro</h3>
+                <div class="mb-4">
+                    <label for="retiro-monto" class="block text-gray-700 font-bold">Monto a Retirar:</label>
+                    <input 
+                        type="number" 
+                        id="retiro-monto" 
+                        placeholder="Ingrese el monto" 
+                        class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
+                    />
+                </div>
+                <button 
+                    type="button" 
+                    class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 w-full">
+                    Retirar
+                </button>
+            </form>
+
+            <!-- Formulario de Transferencia -->
+            <form class="bg-white shadow-md rounded-lg p-6">
+                <h3 class="text-lg font-bold mb-4">Transferencia</h3>
+                <div class="mb-4">
+                    <label for="cuenta-destino" class="block text-gray-700 font-bold">Cuenta Destino:</label>
+                    <input 
+                        type="text" 
+                        id="cuenta-destino" 
+                        placeholder="Número de cuenta" 
+                        class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
+                    />
+                </div>
+                <div class="mb-4">
+                    <label for="transferencia-monto" class="block text-gray-700 font-bold">Monto a Transferir:</label>
+                    <input 
+                        type="number" 
+                        id="transferencia-monto" 
+                        placeholder="Ingrese el monto" 
+                        class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
+                    />
+                </div>
+                <button 
+                    type="button" 
+                    class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 w-full">
+                    Transferir
+                </button>
+            </form>
+        </div>
+    </main>
+</body>
+{% endblock  %}

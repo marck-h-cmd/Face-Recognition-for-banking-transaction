@@ -1,0 +1,70 @@
+{% extends "layouts/base.html" %}
+{% block main %}
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Banco - Panel de Empleado</h1>
+            <nav class="flex space-x-4">
+                <a href="#" class="hover:underline">Inicio</a>
+                <a href="#" class="hover:underline">Clientes</a>
+                <a href="#" class="hover:underline">Cerrar Sesión</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto py-8">
+        <h2 class="text-2xl font-bold text-center mb-6">Ver Transacciones</h2>
+        <form class="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
+            <!-- Buscar cliente -->
+            <div class="mb-4">
+                <label for="dni" class="block text-gray-700 font-bold">Buscar por DNI:</label>
+                <input 
+                    type="text" 
+                    id="dni" 
+                    placeholder="Ingrese el DNI del cliente" 
+                    class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
+                />
+            </div>
+
+            <!-- Botón para buscar -->
+            <button 
+                type="button" 
+                class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 w-full">
+                Buscar Transacciones
+            </button>
+        </form>
+
+        <!-- Tabla de Transacciones -->
+        <div class="mt-8">
+            <h3 class="text-lg font-bold mb-4">Historial de Transacciones</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white shadow-md rounded-lg">
+                    <thead class="bg-blue-600 text-white">
+                        <tr>
+                            <th class="py-2 px-4">ID</th>
+                            <th class="py-2 px-4">Fecha</th>
+                            <th class="py-2 px-4">Monto</th>
+                            <th class="py-2 px-4">Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-gray-100">
+                            <td class="py-2 px-4">001</td>
+                            <td class="py-2 px-4">2024-12-01</td>
+                            <td class="py-2 px-4">$500</td>
+                            <td class="py-2 px-4">Depósito</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4">002</td>
+                            <td class="py-2 px-4">2024-12-05</td>
+                            <td class="py-2 px-4">$300</td>
+                            <td class="py-2 px-4">Retiro</td>
+                        </tr>
+                        <!-- Más filas aquí -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+{% endblock  %}
